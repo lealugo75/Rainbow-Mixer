@@ -1,0 +1,39 @@
+import flet as ft
+
+def main(page: ft.Page):
+    page.title = "RGB Color Mixer"
+
+    # Text that shows RGB values
+    rgb_text = ft.Text(value="R: 0  G: 0  B: 0", size=20)
+
+    # Function to update color
+    def update_color(e):
+        r = int(red_slider.value)
+        g = int(green_slider.value)
+        b = int(blue_slider.value)
+
+        # Change background color
+        page.bgcolor = f"#{r:02x}{g:02x}{b:02x}"
+
+        # Update text
+        rgb_text.value = f"R: {r}  G: {g}  B: {b}"
+
+        page.update()
+
+    # Sliders
+    red_slider = ft.Slider(min=0, max=255, value=0, on_change=update_color)
+    green_slider = ft.Slider(min=0, max=255, value=0, on_change=update_color)
+    blue_slider = ft.Slider(min=0, max=255, value=0, on_change=update_color)
+
+    # Add everything to the screen
+    page.add(
+        ft.Text("Red"),
+        red_slider,
+        ft.Text("Green"),
+        green_slider,
+        ft.Text("Blue"),
+        blue_slider,
+        rgb_text
+    )
+
+ft.app(target=main)
